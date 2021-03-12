@@ -8,7 +8,6 @@ html(lang="en")
     link(rel="stylesheet", href="/styles/normalize.css")
     link(rel="stylesheet", href="/styles/style.css")
   body
-    //- p {{.Title }}
     
     header.header
       .header__content 
@@ -19,8 +18,9 @@ html(lang="en")
       .main__content
         form#form.form
           textarea(id="query" placeholder="query sql...").form__textarea
-          button(type="submit").form__submit convertir 
+          button(type="submit").form__submit analizar
         .response
-          textarea(readonly placeholder="sql query converted").response__textarea
+          textarea(readonly placeholder="sql query converted" id="response").response__textarea
+          button(id="obtener").form__submit obtener
     
     script(src="/js/app.js")
