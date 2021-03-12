@@ -28,13 +28,19 @@ func main() {
 
 	// evaluamos la cadena de entrada damos formato e procedemos a designar
 	// s := "select username,paternal, maternal,email,age from users"
-	s := "insert into users (username, paternal, maternal, email, age) VALUES (marco, perez, perez, marco@gmail.com, 25)"
+	// s := "insert into users (username, paternal, maternal, email, age) VALUES (marco, perez, perez, marco@gmail.com, 25)"
+	s := "UPDATE users SET username = juan, paternal = perez, maternal = perez, email = perez@gmail.com, age = 25 WHERE username = pablo"
 	data, _ := helpers.FormatData(s)
 	// podemos ver los tipos de dato
 	// helpers.GetTypes(data)
 	//fmt.Println(data)
 	designar(data)
 	// tenemos que designar dependiendo con que palabra empieza SELECT, INSERT, DELETE, UPDATE
+
+}
+
+func TransformDelete(data []interface{}) {
+
 }
 
 // evaluador de las funciones
@@ -47,9 +53,11 @@ func designar(data []interface{}) {
 		res := mongo.TransformInsert(data)
 		fmt.Println(res)
 	case sintaxsql.UpdateSQL:
-		fmt.Println("la consulta es un update")
+		res := mongo.TransformUpdate(data)
+		fmt.Println(res)
 	case sintaxsql.DeleteSQL:
 		fmt.Println("la consulta es un delete")
+		TransformDelete(data)
 	default:
 		fmt.Println("Error en la sintaxis")
 	}

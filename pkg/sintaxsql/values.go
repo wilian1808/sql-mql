@@ -19,4 +19,6 @@ var (
 	IntoSQL = models.Reserved{Data: "into"}
 	// ValuesSQL - values
 	ValuesSQL = models.Reserved{Data: "values"}
+	// SetSQL - set
+	SetSQL = models.Reserved{Data: "set"}
 )
