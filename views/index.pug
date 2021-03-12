@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title SQL - MQL
+    link(rel="stylesheet", href="/styles/normalize.css")
+    link(rel="stylesheet", href="/styles/style.css")
+  body
+    //- p {{.Title }}
+    
+    header.header
+      .header__content 
+        a(href="/").header__link.header__link--title SQL - MQL
+        a(href="https://github.com/wilian1808/sql-mql").header__link.header__link--github github 
+
+    main.main
+      .main__content
+        form#form.form
+          textarea(id="query" placeholder="query sql...").form__textarea
+          button(type="submit").form__submit convertir 
+        .response
+          textarea(readonly placeholder="sql query converted").response__textarea
+    
+    script(src="/js/app.js")
