@@ -27,20 +27,16 @@ func main() {
 	// app.Listen(":5555")
 
 	// evaluamos la cadena de entrada damos formato e procedemos a designar
-	// s := "select username,paternal, maternal,email,age from users"
+	// s := "select * from users"
 	// s := "insert into users (username, paternal, maternal, email, age) VALUES (marco, perez, perez, marco@gmail.com, 25)"
-	s := "UPDATE users SET username = juan, paternal = perez, maternal = perez, email = perez@gmail.com, age = 25 WHERE username = pablo"
+	// s := "UPDATE users SET username = juan, paternal = perez, maternal = perez, email = perez@gmail.com, age = 25 WHERE username = pablo"
+	s := "FROM users WHERE username = juan"
 	data, _ := helpers.FormatData(s)
 	// podemos ver los tipos de dato
 	// helpers.GetTypes(data)
 	//fmt.Println(data)
 	designar(data)
 	// tenemos que designar dependiendo con que palabra empieza SELECT, INSERT, DELETE, UPDATE
-
-}
-
-func TransformDelete(data []interface{}) {
-
 }
 
 // evaluador de las funciones
@@ -56,23 +52,14 @@ func designar(data []interface{}) {
 		res := mongo.TransformUpdate(data)
 		fmt.Println(res)
 	case sintaxsql.DeleteSQL:
-		fmt.Println("la consulta es un delete")
-		TransformDelete(data)
+		res := mongo.TransformDelete(data)
+		fmt.Println(res)
 	default:
-		fmt.Println("Error en la sintaxis")
+		res := fmt.Errorf("Error en la sintaxis: %s", data[0])
+		fmt.Println(res)
 	}
 }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 func index(c *fiber.Ctx) error {
 	return c.Render("index", fiber.Map{
 		"data": "db.users.find()",
