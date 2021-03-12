@@ -58,11 +58,19 @@ func FormatData(query string) ([]interface{}, error) {
 					Data: strings.TrimSpace(strings.ToLower(au)),
 				}
 				arr = append(arr, s)
+			case "VALUES":
+				s := models.Reserved{
+					Data: strings.TrimSpace(strings.ToLower(au)),
+				}
+				arr = append(arr, s)
 			default:
 				// s := models.Identifier{
 				// 	Data: strings.TrimSpace(strings.ToLower(au)),
 				// }
-				arr = append(arr, strings.TrimSpace(strings.ToLower(au)))
+				aa := strings.TrimSpace(strings.ToLower(au))
+				bb := strings.ReplaceAll(aa, "(", "")
+				cc := strings.ReplaceAll(bb, ")", "")
+				arr = append(arr, cc)
 			}
 
 		} else {
@@ -72,7 +80,10 @@ func FormatData(query string) ([]interface{}, error) {
 					// s := models.Identifier{
 					// 	Data: strings.TrimSpace(strings.ToLower(vaux)),
 					// }
-					arr = append(arr, strings.TrimSpace(strings.ToLower(vaux)))
+					aa := strings.TrimSpace(strings.ToLower(vaux))
+					bb := strings.ReplaceAll(aa, "(", "")
+					cc := strings.ReplaceAll(bb, ")", "")
+					arr = append(arr, cc)
 				}
 			}
 		}

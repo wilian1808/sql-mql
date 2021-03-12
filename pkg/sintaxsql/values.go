@@ -15,4 +15,8 @@ var (
 	WhereSQL = models.Reserved{Data: "where"}
 	// FromSQL - from
 	FromSQL = models.Reserved{Data: "from"}
+	// IntoSQL - into
+	IntoSQL = models.Reserved{Data: "into"}
+	// ValuesSQL - values
+	ValuesSQL = models.Reserved{Data: "values"}
 )

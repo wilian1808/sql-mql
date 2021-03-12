@@ -26,23 +26,26 @@ func main() {
 	// app.Post("/query", query)
 	// app.Listen(":5555")
 
-	// evaluamos la cadena de entrada damos formato e procedemos a evaluar
-	data, _ := helpers.FormatData("select username,paternal, maternal,email,age from users")
+	// evaluamos la cadena de entrada damos formato e procedemos a designar
+	// s := "select username,paternal, maternal,email,age from users"
+	s := "insert into users (username, paternal, maternal, email, age) VALUES (marco, perez, perez, marco@gmail.com, 25)"
+	data, _ := helpers.FormatData(s)
 	// podemos ver los tipos de dato
 	// helpers.GetTypes(data)
 	//fmt.Println(data)
-	evaluar(data)
-	// tenemos que evaluar dependiendo con que palabra empieza SELECT, INSERT, DELETE, UPDATE
+	designar(data)
+	// tenemos que designar dependiendo con que palabra empieza SELECT, INSERT, DELETE, UPDATE
 }
 
 // evaluador de las funciones
-func evaluar(data []interface{}) {
+func designar(data []interface{}) {
 	switch data[0] {
 	case sintaxsql.SelectSQL:
 		res := mongo.TransformSelect(data)
 		fmt.Println(res)
 	case sintaxsql.InsertSQL:
-		fmt.Println("la consulta es un insert")
+		res := mongo.TransformInsert(data)
+		fmt.Println(res)
 	case sintaxsql.UpdateSQL:
 		fmt.Println("la consulta es un update")
 	case sintaxsql.DeleteSQL:
